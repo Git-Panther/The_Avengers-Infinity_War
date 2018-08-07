@@ -8,10 +8,10 @@
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 	</settings>
 	<typeAliases>
-		<!-- <typeAlias type="com.kh.firstSpring.member.model.vo.Member" alias="Member"/>  -->
+		<typeAlias type="com.kh.planner.member.model.vo.Member" alias="Member"/>
 	</typeAliases>
 	<mappers>
-		<!-- <mapper resource="mybatis/sql/memberMapper.xml" /> -->
+		<mapper resource="mybatis/sql/memberMapper.xml" />
 	</mappers>
 </configuration>
 

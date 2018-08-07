@@ -56,6 +56,16 @@
 #resultAmount{
 	margin-top:10px;
 	margin-botton:10px;
-	width:1000px;
-	text-align: justify;
+}
+
+.selectRow{
+	text-align:justify;
+}
+
+#resultAmount{
+	margin-right:200px;
+}
+
+#arrangeList{
+	margin-left:200px;
 }

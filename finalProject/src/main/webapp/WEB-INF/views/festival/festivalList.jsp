@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:import url="/header.do"/>
 <c:import url="searchArea.jsp"/>
 <!DOCTYPE html>
 <html>
@@ -140,7 +139,9 @@
     	}else{
     		minShow = 1;
     		maxShow = minShow + 9;
-    	}  	
+    	}
+    	
+    	if(maxShow > maxPage) maxShow = maxPage; // 최대치 넘으면 안되므로
     	// var minShow = maxShow - (pageLimit - 1); // 현재 표시되는 최소 페이지 번호
     	
     	//console.log(currentPage, minPage, totalCount, numOfRows, pageLimit, maxPage, minShow, maxShow);

@@ -21,7 +21,7 @@ public class FestivalController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(FestivalController.class);
 	
-	@RequestMapping("festivalList.do") // 리스트 표시하는 페이지로 이동
+	@RequestMapping(value="festivalList.do", method = RequestMethod.GET) // 리스트 표시하는 페이지로 이동
 	public ModelAndView festivalList(ModelAndView mv, String pageNo, String arrange, String areaCode, String sigunguCode
 			, String eventStartDate, String eventEndDate) {
 		if(null != arrange) mv.addObject("arrange", arrange);
@@ -218,6 +218,42 @@ public class FestivalController {
 		params.append("&mapX="+mapx); // x 좌표
 		params.append("&mapY="+mapy); // y 좌표
 		params.append("&radius=1000"); // 거리 반경(m)
+		params.append("&_type=json"); // json으로
+		//System.out.println(mapx + ", " + mapy + ", " + contenttypeid);
+		
+		URL url = null; // 결과를 볼 url
+		InputStream in = null; // 바이트를 읽어오기 위해 필요한 인풋 스트림
+		ByteArrayOutputStream bos1 = null; // 바이트 출력 스트림
+		String result = null; // 바이트 출력 스트림에서 json 문자열을 받을 변수
+		try {
+			url = new URL(address + params.toString());
+			in = url.openStream();
+			bos1 = new ByteArrayOutputStream();
+			IOUtils.copy(in, bos1);
+			in.close();
+			bos1.close();
+			result = bos1.toString();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	// 주요 도시 검색(지역 코드가 있으면 지역 코드 기반하여 시군구 찾음)
+	@RequestMapping(value = "areaCodeList.do", method = RequestMethod.GET, produces="application/json; charset=UTF-8")
+	public @ResponseBody String areaCodeList(String areaCode){	
+		String address = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaCode";
+		StringBuilder params = new StringBuilder("?");
+		params.append("ServiceKey="+key);
+		params.append("&numOfRows=100"); // 모든 주요 도시
+		//params.append("&pageNo="+1); // 주변 정보 전체
+		params.append("&MobileOS=ETC"); // 모바일이 아니므로 etc
+		params.append("&MobileApp=planner"); // 앱 이름
+		if(null != areaCode) params.append("&areaCode="+areaCode); // 지역코드가 있으면 그 지역의 시군구, 아니면 주요 도시 전체
 		params.append("&_type=json"); // json으로
 		//System.out.println(mapx + ", " + mapy + ", " + contenttypeid);
 		

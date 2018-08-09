@@ -8,42 +8,6 @@
 <meta charset="UTF-8">
 <title>Search Area</title>
 <link href="resources/css/festival.css" rel="stylesheet">
-</head>
-<body>
-<div class="outer">
-	<c:url var="searchResult" value="/festivalList.do"></c:url>
-	<form id="searchArea" method="get" action="${searchResult}">
-		<!-- <div id="typeList"></div><br> -->
-		<!-- <div id="serviceList"></div><br> -->
-		<div class="searchRow">
-			<div id="areaList">
-				<select name="areaCode" id="areaSelect"></select>
-			</div>
-			<div id="sigunguList">
-				<select name="sigunguCode" id="sigunguSelect">
-					<option>(시군구 선택)</option>
-				</select>
-			</div>
-			<button id="submitSearchBtn">검색</button>
-		</div>
-		<br>
-		<div class="searchRow">
-			<!-- 달력 1 -->
-			<!-- 달력 2 -->
-		</div>
-		<br>
-		<div class="searchRow">
-			<div id="resultAmount"></div>
-			<div id="arrangeList">
-				<select id="arrange" name="arrange">
-					<option value="D">등록일</option>				
-					<option value="C">수정일</option>
-					<option value="B">조회수</option>
-				</select>
-			</div>
-		</div>
-	</form>		
-</div>
 <script>
 	function areaCodeList(){
 		$.ajax({        
@@ -96,8 +60,13 @@
 			//console.log(option);
 			$select.append(option);
 		});
+		// 항목 선택 이벤트 추가
 		$select.on("change", function(){
 			sigunguCodeList($(this).val());
+			// 장소가 바뀌었기에 두 번째 선택은 해제되어야 함
+			$("#sigunguSelect option").each(function(){
+				$(this).prop("selected", false);
+			}); 
 		}).appendTo($("#areaList"));
 	}
 	
@@ -111,12 +80,13 @@
 		$select.append(option);
 		//console.log(list);
 		if(areaCode != ""){
-			list.forEach(function(v, i) {
+			list.forEach(function(v) {
 				//console.log(area);
 				option = $("<option>");
 				option.val(v.code);
 				option.text(v.name);
-				if(option.val() == "${sigunguCode}") {
+				// 지역, 시군구 전부 일치해야 함
+				if($("#areaSelect").val() == '<c:out value="${areaCode}"/>' && option.val() == '<c:out value="${sigunguCode}"/>') {
 					option.prop("selected", true);
 				}
 				//console.log(option);
@@ -125,11 +95,76 @@
 		}
 		$select.appendTo($("#sigunguList"));
 	}
-
+	
+	function printArrange(){
+		$("#arrange option").each(function(){
+			//console.log($(this));
+			if($(this).val() == "${arrange}") {
+				$(this).prop("selected", true);
+			}
+		});
+	}
+	
+	function printDate(){
+		//console.log($("#eventStartDate"));
+		$("#eventStartDate").val("${eventStartDate}");
+		$("#eventEndDate").val("${eventEndDate}");
+	}
+</script>
+</head>
+<body>
+<div class="outer">
+	<c:url var="searchResult" value="/festivalList.do"></c:url>
+	<form id="searchArea" method="get" action="${searchResult}">
+		<!-- <div id="typeList"></div><br> -->
+		<!-- <div id="serviceList"></div><br> -->
+		<div class="searchRow">
+			<label>지역 선택 : </label>
+			<div id="areaList">
+				<select name="areaCode" id="areaSelect"></select>
+			</div>
+			<div id="sigunguList">
+				<select name="sigunguCode" id="sigunguSelect">
+					<option>(시군구 선택)</option>
+				</select>
+			</div>
+		</div>
+		<br>
+		<div class="searchRow">
+			<!-- 달력 1 -->
+			<label>기간 선택 : </label><input type="date" name="eventStartDate" id="eventStartDate"/>
+			<!-- 달력 2 -->
+			<label> - </label><input type="date" name="eventEndDate" id="eventEndDate"/>
+			<button id="submitSearchBtn">검색</button>
+		</div>
+		<br>
+		<div class="searchRow">
+			<div id="resultAmount"></div>
+			<div id="arrangeList">
+				<select id="arrange" name="arrange">
+					<option value="D">등록일</option>				
+					<option value="C">수정일</option>
+					<option value="B">조회수</option>
+				</select>
+			</div>
+		</div>
+	</form>		
+</div>
+<script>
 	$(function(){
 		$("#submitSearchBtn").click(function(){$("#searchArea").submit();});
-		areaCodeList(); // 지역 출력
-		// 정렬순 선택 여부 추가
+		areaCodeList(); // 지역 출력 + 시군구 출력
+		// 시군구 자동 선택
+		/*
+		$("#sigunguSelect option").each(function(){
+			console.log($(this));
+			if($(this).val() == '<c:out value="${sigunguCode}"/>') {
+				$(this).prop("selected", true);
+			}
+		});
+		*/
+		printArrange(); // 정렬순 선택 여부 추가
+		printDate(); // 기간 반영
 	});
 </script>
 </body>

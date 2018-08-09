@@ -24,14 +24,14 @@ public class FestivalController {
 	@RequestMapping(value="festivalList.do", method = RequestMethod.GET) // 리스트 표시하는 페이지로 이동
 	public ModelAndView festivalList(ModelAndView mv, String pageNo, String arrange, String areaCode, String sigunguCode
 			, String eventStartDate, String eventEndDate) {
-		if(null != arrange) mv.addObject("arrange", arrange);
-		if(null != pageNo) mv.addObject("pageNo", pageNo);
+		if(null != arrange || "".equals(arrange)) mv.addObject("arrange", arrange);
+		if(null != pageNo || "".equals(pageNo)) mv.addObject("pageNo", pageNo);
 		else mv.addObject("pageNo", "1");
 			
-		if(null != areaCode) mv.addObject("areaCode", areaCode);
-		if(null != sigunguCode) mv.addObject("sigunguCode", sigunguCode);
-		if(null != eventStartDate) mv.addObject("eventStartDate", eventStartDate);
-		if(null != eventEndDate) mv.addObject("eventEndDate", eventEndDate);
+		if(null != areaCode || "".equals(areaCode)) mv.addObject("areaCode", areaCode);
+		if(null != sigunguCode || "".equals(sigunguCode)) mv.addObject("sigunguCode", sigunguCode);
+		if(null != eventStartDate || "".equals(eventStartDate)) mv.addObject("eventStartDate", eventStartDate);
+		if(null != eventEndDate || "".equals(eventEndDate)) mv.addObject("eventEndDate", eventEndDate);
 		mv.setViewName("festival/festivalList");
 		logger.info(pageNo + ", " + arrange + ", " + areaCode + ", " + sigunguCode + ", " + eventStartDate + ", " + eventEndDate);
 		return mv;
@@ -51,8 +51,8 @@ public class FestivalController {
 		params.append("&arrange=" + (null != arrange ? arrange : "D")); // D 조건(생성일순)으로 정렬 -> C 조건(수정일 순) -> Q(이미지 있는 수정일 순)
 		if(null != areaCode) params.append("&areaCode="+areaCode); // 지역코드 : 전체
 		if(null != sigunguCode) params.append("&sigunguCode="+sigunguCode); // 지역코드 : 시군구 - 안 따짐
-		if(null != eventStartDate) params.append("&eventStartDate="+eventStartDate); // 1월 1일부터
-		if(null != eventEndDate) params.append("&eventEndDate="+eventEndDate); // 12월 3일까지
+		if(null != eventStartDate) params.append("&eventStartDate="+eventStartDate.replaceAll("-", "")); // 1월 1일부터
+		if(null != eventEndDate) params.append("&eventEndDate="+eventEndDate.replaceAll("-", "")); // 12월 3일까지
 		params.append("&_type=json"); // json으로
 		logger.info(pageNo + ", " + arrange + ", " + areaCode + ", " + sigunguCode + ", " + eventStartDate + ", " + eventEndDate);
 		

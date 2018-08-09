@@ -39,7 +39,7 @@
 	
 	function printFestivalList(list){
 		//console.log(list);
-        //console.log(list.response);
+        //console.log(list.response);        
         var myItem = list.response.body.items.item;
         var $festivals = $("#festivals");
         var img;
@@ -50,12 +50,21 @@
         var tr = $("<tr>");
         var th = $("<th>");
         var td = $("<td>");
+        var size; // 결과 개수
         
         $("#resultAmount").text("");
         $("#resultAmount").append($("<p>").text("결과  : " + list.response.body.totalCount + "건"));
         
         $festivals.html("");
-        for(var i = 0; i < myItem.length; i++){
+        //console.log(myItem);
+        if(undefined == myItem) size = 0; // 결과가 없으므로 0
+        else if(undefined == myItem.length) { // 결과가 1개이면 배열이 아닌 객체로만 옴
+        	size = 1;
+        	myItem = [myItem]; // 배열화시켜서 for문 처리 통일함
+        }
+        else size = myItem.length; // 결과가 2개 이상 있으므로 2 이상
+        
+        for(var i = 0; i < size; i++){
         	//console.log(myItem[i]);
         	maintd = $("<td>");
         	subTable = $("<table class='festivalInfo'>");
@@ -64,8 +73,8 @@
         	td = $("<td colspan='2'>");
     
         	img = $("<img>").css({"width":"300px", "height":"300px"});
-        	if(myItem[i].firstimage != undefined) img.attr("src", myItem[i].firstimage);
-        	else img.attr("src", "/planner/resources/images/festival/no_image.png");
+        	if(undefined == myItem[i].firstimage) img.attr("src", "/planner/resources/images/festival/no_image.png");
+        	else img.attr("src", myItem[i].firstimage);
         	td.append(img).appendTo(td);
         	tr.append(td).appendTo(subTable);
         	

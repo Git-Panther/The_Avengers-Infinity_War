@@ -12,7 +12,7 @@
 	function festivalDetailCommon(){
 		$.ajax({        
 	        url: 'festivalDetailCommon.do',
-	        type: 'get',
+	        type: 'post',
 	        data: { contentid : ${contentid} },
 	        dataType: 'json',
 	        success: function(data){
@@ -28,7 +28,7 @@
 	function festivalDetailIntro(){
 		$.ajax({        
 	        url: 'festivalDetailIntro.do',
-	        type: 'get',
+	        type: 'post',
 	        data: { contentid : ${contentid} },
 	        dataType: 'json',
 	        success: function(data){
@@ -44,7 +44,7 @@
 	function festivalDetailInfo(){
 		$.ajax({        
 	        url: 'festivalDetailInfo.do',
-	        type: 'get',
+	        type: 'post',
 	        data: { contentid : ${contentid} },
 	        dataType: 'json',
 	        success: function(data){
@@ -59,7 +59,7 @@
 	function locationBasedList(mapx, mapy, contenttypeid){
 		$.ajax({        
 	        url: 'locationBasedList.do',
-	        type: 'get',
+	        type: 'post',
 	        data: { mapx : mapx, mapy : mapy, contenttypeid : contenttypeid},
 	        dataType: 'json',
 	        success: function(data){

@@ -18,6 +18,11 @@
 	text-decoration: underline;
 	cursor:pointer;
 }
+
+.img:hover{
+	border:1px solid black;
+}
+
 .pageList{
 	display:inline-block;
 	text-align: center;

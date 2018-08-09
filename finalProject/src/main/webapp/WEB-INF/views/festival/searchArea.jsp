@@ -12,7 +12,7 @@
 	function areaCodeList(){
 		$.ajax({        
 	        url: 'areaCodeList.do',
-	        type: 'get',
+	        type: 'post',
 	        dataType: 'json',
 	        success: function(data){
 	        	//console.log(data);
@@ -27,7 +27,7 @@
 	function sigunguCodeList(areaCode){
 		$.ajax({        
 	        url: 'areaCodeList.do',
-	        type: 'get',
+	        type: 'post',
 	        data: { areaCode : areaCode },
 	        dataType: 'json',
 	        success: function(data){
@@ -125,7 +125,7 @@
 			</div>
 			<div id="sigunguList">
 				<select name="sigunguCode" id="sigunguSelect">
-					<option>(시군구 선택)</option>
+					<option value="">(시군구 선택)</option>
 				</select>
 			</div>
 		</div>

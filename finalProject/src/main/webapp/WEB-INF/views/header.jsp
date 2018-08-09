@@ -11,7 +11,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="resources/css/header.css" rel="stylesheet" />
 <meta charset="UTF-8">
-<title>Header</title>
+<title>페스티벌 플래너</title>
 <script>
 function loginPage(){
 	location.href="loginPage.do";

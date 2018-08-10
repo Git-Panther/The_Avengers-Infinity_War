@@ -67,7 +67,7 @@
 			$("#sigunguSelect option").each(function(){
 				$(this).prop("selected", false);
 			}); 
-		}).appendTo($("#areaList"));
+		});//.appendTo($("#areaList"));
 	}
 	
 	function printSigunguList(areaCode, list){
@@ -118,36 +118,63 @@
 	<form id="searchArea" method="get" action="${searchResult}">
 		<!-- <div id="typeList"></div><br> -->
 		<!-- <div id="serviceList"></div><br> -->
-		<div class="searchRow">
-			<label>지역 선택 : </label>
-			<div id="areaList">
-				<select name="areaCode" id="areaSelect"></select>
-			</div>
-			<div id="sigunguList">
-				<select name="sigunguCode" id="sigunguSelect">
-					<option value="">(시군구 선택)</option>
-				</select>
-			</div>
-		</div>
-		<br>
-		<div class="searchRow">
-			<!-- 달력 1 -->
-			<label>기간 선택 : </label><input type="date" name="eventStartDate" id="eventStartDate"/>
-			<!-- 달력 2 -->
-			<label> - </label><input type="date" name="eventEndDate" id="eventEndDate"/>
-			<button id="submitSearchBtn">검색</button>
-		</div>
-		<br>
-		<div class="searchRow">
-			<div id="resultAmount"></div>
-			<div id="arrangeList">
-				<select id="arrange" name="arrange">
-					<option value="D">등록일</option>				
-					<option value="C">수정일</option>
-					<option value="B">조회수</option>
-				</select>
-			</div>
-		</div>
+		<table class="search">
+			<tr class="searchRow">
+				<td>
+					<label>지역 : </label>
+				</td>
+				<td>
+					<div id="areaList">
+						<select name="areaCode" id="areaSelect"></select>
+					</div>
+				</td>
+				<td>
+					<div id="sigunguList">
+						<select name="sigunguCode" id="sigunguSelect">
+							<option value="">(시군구 선택)</option>
+						</select>
+					</div>
+				</td>
+				<td colspan="2">
+				</td>
+			</tr>
+			<tr class="searchRow">
+				<td>
+					<label>기간 선택 : </label>
+				</td>
+				<td>
+					<!-- 달력 1 -->
+					<input type="date" name="eventStartDate" id="eventStartDate"/>
+				</td>
+				<td>
+					<label> - </label>
+				</td>
+				<td>
+					<!-- 달력 2 -->
+					<input type="date" name="eventEndDate" id="eventEndDate"/>
+				</td>
+				<td>
+					<button id="submitSearchBtn">검색</button>
+				</td>
+			</tr>
+			<tr class="searchRow">
+				<td>
+					<div id="resultAmount"></div>
+				</td>
+				<td colspan="3">
+				<!-- 빈 공간 -->
+				</td>
+				<td>
+					<div id="arrangeList">
+						<select id="arrange" name="arrange">
+							<option value="D">등록일</option>				
+							<option value="C">수정일</option>
+							<option value="B">조회수</option>
+						</select>
+					</div>
+				</td>
+			</tr>
+		</table>
 	</form>		
 </div>
 <script>

@@ -52,6 +52,7 @@
         var td = $("<td>");
         var size; // 결과 개수
         var dateString; // 행사 기간
+        var cols = 4; // 한 행에 n열
         
         $("#resultAmount").text("");
         $("#resultAmount").append($("<p>").text("결과  : " + list.response.body.totalCount + "건"));
@@ -117,7 +118,7 @@
         	tr.append(th).append(td).appendTo(subTable);
         	*/
         	maintd.append(subTable).appendTo(maintr);
-        	if( i % 3 == 2 || i == myItem.length - 1){
+        	if( i % cols == cols - 1 || i == myItem.length - 1){
         		maintr.appendTo(tableList);
         		maintr = $("<tr>");
         	}    

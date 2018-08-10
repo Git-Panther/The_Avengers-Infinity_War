@@ -74,7 +74,7 @@
         	//th = $("<th>");
         	td = $("<td colspan='2'>");
     
-        	img = $("<img>").css({"width":"300px", "height":"300px"}).addClass("img");
+        	img = $("<img>").addClass("img");
         	if(undefined == myItem[i].firstimage) img.attr("src", "/planner/resources/images/festival/no_image.png");
         	else img.attr("src", myItem[i].firstimage);
         	td.append(img).appendTo(td);
@@ -157,6 +157,7 @@
         	}
         	
         	if(maxShow > maxPage) maxShow = maxPage; // 최대치 넘으면 안되므로
+        	if(minShow < 1) minShow = minPage; // 1페이지보다 작아질 순 없다
         	// var minShow = maxShow - (pageLimit - 1); // 현재 표시되는 최소 페이지 번호
         	
         	//console.log(currentPage, minPage, totalCount, numOfRows, pageLimit, maxPage, minShow, maxShow);
@@ -224,7 +225,7 @@
     	if("${sigunguCode}" != "") loc += "&sigunguCode="+"${sigunguCode}";
     	if("${eventStartDate}" != "") loc += "&eventStartDate="+"${eventStartDate}";
     	if("${eventEndDate}" != "") loc += "&eventEndDate="+"${eventEndDate}";
-    	location.href=loc;
+    	location.href = loc;
     }
     
     function dateFormat(date){
@@ -240,7 +241,6 @@
 </head>
 <body>
 <div class="outer">
-	<hr>
 	<div class="area" id="festivals"></div>
 	<br>
 	<div class="pageList" id="pageList"></div>

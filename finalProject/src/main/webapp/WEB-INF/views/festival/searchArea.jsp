@@ -120,50 +120,42 @@
 		<!-- <div id="serviceList"></div><br> -->
 		<table class="search">
 			<tr class="searchRow">
-				<td>
+				<td class="searchHead">
 					<label>지역 : </label>
 				</td>
 				<td>
 					<div id="areaList">
 						<select name="areaCode" id="areaSelect"></select>
 					</div>
-				</td>
-				<td>
 					<div id="sigunguList">
 						<select name="sigunguCode" id="sigunguSelect">
 							<option value="">(시군구 선택)</option>
 						</select>
 					</div>
 				</td>
-				<td colspan="2">
-				</td>
+				<td colspan="4"></td>
 			</tr>
 			<tr class="searchRow">
-				<td>
-					<label>기간 선택 : </label>
+				<td class="searchHead">
+					<label>기간 : </label>
 				</td>
 				<td>
 					<!-- 달력 1 -->
 					<input type="date" name="eventStartDate" id="eventStartDate"/>
-				</td>
-				<td>
 					<label> - </label>
-				</td>
-				<td>
 					<!-- 달력 2 -->
 					<input type="date" name="eventEndDate" id="eventEndDate"/>
 				</td>
+				<td colspan="3"></td>
 				<td>
 					<button id="submitSearchBtn">검색</button>
 				</td>
 			</tr>
 			<tr class="searchRow">
-				<td>
+				<td class="searchHead">
 					<div id="resultAmount"></div>
 				</td>
-				<td colspan="3">
-				<!-- 빈 공간 -->
-				</td>
+				<td colspan="4"></td>
 				<td>
 					<div id="arrangeList">
 						<select id="arrange" name="arrange">
@@ -175,7 +167,8 @@
 				</td>
 			</tr>
 		</table>
-	</form>		
+	</form>
+	<hr>		
 </div>
 <script>
 	$(function(){

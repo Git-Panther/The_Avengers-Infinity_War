@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class CommonController {
-	@RequestMapping(value = "header.do", method = RequestMethod.GET)
+	@RequestMapping(value = "header.do")
 	public String header() {
 		return "header";
 	}
 	
-	@RequestMapping(value = "footer.do", method = RequestMethod.GET)
+	@RequestMapping(value = "footer.do")
 	public String footer() {
 		return "footer";
 	}

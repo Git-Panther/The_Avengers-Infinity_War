@@ -115,7 +115,7 @@
 <body>
 <div class="outer">
 	<c:url var="searchResult" value="/festivalList.do"></c:url>
-	<form id="searchArea" method="get" action="${searchResult}">
+	<form id="searchArea" method="post" action="${searchResult}">
 		<!-- <div id="typeList"></div><br> -->
 		<!-- <div id="serviceList"></div><br> -->
 		<table class="search">

@@ -59,8 +59,10 @@
         
         $festivals.html("");
         //console.log(myItem);
-        if(undefined == myItem) size = 0; // 결과가 없으므로 0
-        else if(undefined == myItem.length) { // 결과가 1개이면 배열이 아닌 객체로만 옴
+        if(undefined == myItem) {
+        	size = 0; // 결과가 없으므로 0
+        	$("<p>").text("검색 결과가 없습니다.").appendTo($festivals);
+        } else if(undefined == myItem.length) { // 결과가 1개이면 배열이 아닌 객체로만 옴
         	size = 1;
         	myItem = [myItem]; // 배열화시켜서 for문 처리 통일함
         }

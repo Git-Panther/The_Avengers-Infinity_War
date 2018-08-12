@@ -17,7 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class FestivalController {
-	private String key = "kLZYhnukkkQDzQJ58%2FtZe6IjLUnEn%2FTtuQiqyzSwbiJ8e9SiuyV3xFtgwUu9jpqT33DASyAZb8ST3r3xGD4PJQ%3D%3D";
+	private String tourapikey = "kLZYhnukkkQDzQJ58%2FtZe6IjLUnEn%2FTtuQiqyzSwbiJ8e9SiuyV3xFtgwUu9jpqT33DASyAZb8ST3r3xGD4PJQ%3D%3D";
+	private String forecastkey = "";
 	
 	private static final Logger logger = LoggerFactory.getLogger(FestivalController.class);
 	
@@ -42,7 +43,7 @@ public class FestivalController {
 	public @ResponseBody String areaCodeList(String areaCode){	
 		String address = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaCode";
 		StringBuilder params = new StringBuilder("?");
-		params.append("ServiceKey="+key);
+		params.append("ServiceKey="+tourapikey);
 		params.append("&numOfRows=100"); // 모든 주요 도시
 		//params.append("&pageNo="+1); // 주변 정보 전체
 		params.append("&MobileOS=ETC"); // 모바일이 아니므로 etc
@@ -79,7 +80,7 @@ public class FestivalController {
 			, String eventStartDate, String eventEndDate){ // 페이지 번호, 정렬 기준	
 		String address = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival";
 		StringBuilder params = new StringBuilder("?");
-		params.append("ServiceKey="+key);
+		params.append("ServiceKey="+tourapikey);
 		params.append("&numOfRows=12"); // 한 번에 조회하는 정보 : 12개
 		params.append("&pageNo="+ (null != pageNo ? pageNo : "1")); // x페이지
 		params.append("&MobileOS=ETC"); // 모바일이 아니므로 etc
@@ -128,7 +129,7 @@ public class FestivalController {
 	public @ResponseBody String festivalDetailCommon(int contentid){	
 		String address = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon";
 		StringBuilder params = new StringBuilder("?");
-		params.append("ServiceKey="+key);
+		params.append("ServiceKey="+tourapikey);
 		//params.append("&numOfRows=1"); // 상세정보 1개
 		//params.append("&pageNo="+1); // 1페이지
 		params.append("&MobileOS=ETC"); // 모바일이 아니므로 etc
@@ -171,7 +172,7 @@ public class FestivalController {
 	public @ResponseBody String festivalDetailIntro(int contentid){	
 		String address = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailIntro";
 		StringBuilder params = new StringBuilder("?");
-		params.append("ServiceKey="+key);
+		params.append("ServiceKey="+tourapikey);
 		//params.append("&numOfRows=1"); // 상세정보 1개
 		//params.append("&pageNo="+1); // 1페이지
 		params.append("&MobileOS=ETC"); // 모바일이 아니므로 etc
@@ -208,7 +209,7 @@ public class FestivalController {
 	public @ResponseBody String festivalDetailInfo(int contentid){	
 		String address = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailInfo";
 		StringBuilder params = new StringBuilder("?");
-		params.append("ServiceKey="+key);
+		params.append("ServiceKey="+tourapikey);
 		//params.append("&numOfRows=1"); // 상세정보 1개
 		//params.append("&pageNo="+1); // 1페이지
 		params.append("&MobileOS=ETC"); // 모바일이 아니므로 etc
@@ -245,7 +246,7 @@ public class FestivalController {
 	public @ResponseBody String locationBasedList(double mapx, double mapy, int contenttypeid){	
 		String address = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/locationBasedList";
 		StringBuilder params = new StringBuilder("?");
-		params.append("ServiceKey="+key);
+		params.append("ServiceKey="+tourapikey);
 		//params.append("&numOfRows=10"); // 주변 정보 전체
 		//params.append("&pageNo="+1); // 주변 정보 전체
 		params.append("&MobileOS=ETC"); // 모바일이 아니므로 etc

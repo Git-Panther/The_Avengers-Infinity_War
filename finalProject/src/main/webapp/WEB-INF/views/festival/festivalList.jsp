@@ -221,6 +221,22 @@
     }
     
     function movePage(pageNo){
+    	<c:url var="movePage" value="/festivalList.do"></c:url>
+    	var form = $("<form>");
+    	form.attr("id", "movePage");
+    	form.attr("method", "post");
+    	form.attr("action", "${movePage}");
+    	$("<input type='hidden'>").attr("name", "pageNo").val(pageNo).appendTo(form);
+    	if("${arrange}" != "") $("<input type='hidden'>").attr("name", "arrange").val("${arrange}").appendTo(form);
+    	if("${areaCode}" != "") $("<input type='hidden'>").attr("name", "areaCode").val("${areaCode}").appendTo(form);
+    	if("${sigunguCode}" != "") $("<input type='hidden'>").attr("name", "sigunguCode").val("${sigunguCode}").appendTo(form);
+    	if("${eventStartDate}" != "") $("<input type='hidden'>").attr("name", "eventStartDate").val("${eventStartDate}").appendTo(form);
+    	if("${eventEndDate}" != "") $("<input type='hidden'>").attr("name", "eventEndDate").val("${eventEndDate}").appendTo(form);
+		form.appendTo($("#pageList"));
+    	//console.log(form);
+		form.submit(); // 이렇게 해야 url 노출을 막을 수 있다.
+    	
+    	/*
     	var loc = "/planner/festivalList.do?pageNo="+pageNo;
     	if("${arrange}" != "") loc += "&arrange="+"${arrange}";
     	if("${areaCode}" != "") loc += "&areaCode="+"${areaCode}";
@@ -228,6 +244,7 @@
     	if("${eventStartDate}" != "") loc += "&eventStartDate="+"${eventStartDate}";
     	if("${eventEndDate}" != "") loc += "&eventEndDate="+"${eventEndDate}";
     	location.href = loc;
+    	*/
     }
     
     function dateFormat(date){
@@ -238,6 +255,7 @@
     function festivalDetail(contentid){
     	//console.log(contentid, 15);
     	location.href="/planner/festival.do?contentid="+contentid;
+    	// 정 보안을 원한다면 가려라. form 태그로
     }
 </script>
 </head>

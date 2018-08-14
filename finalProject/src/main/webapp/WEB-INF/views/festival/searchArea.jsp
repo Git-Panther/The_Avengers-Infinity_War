@@ -9,6 +9,9 @@
 <title>Search Area</title>
 <link href="resources/css/festival.css" rel="stylesheet">
 <script>
+	var area = '<c:out value="${areaCode}"/>'; // 이름 중복 막으려고 줄임
+	var sigungu = '<c:out value="${sigunguCode}"/>'; // 여기에 원래 선택한 area, sigungu 저장하고 반영 후에 날림
+
 	function areaCodeList(){
 		$.ajax({        
 	        url: 'areaCodeList.do',
@@ -53,9 +56,10 @@
 			option = $("<option>");
 			option.val(v.code);
 			option.text(v.name);
-			if(option.val() == "${areaCode}") {
+			if(option.val() == area) { // 골랐기 때문에 한다.
 				option.prop("selected", true);
 				sigunguCodeList(option.val());
+				area = "";
 			}
 			//console.log(option);
 			$select.append(option);
@@ -78,16 +82,20 @@
 		option.val(undefined);
 		option.text("(시군구 선택)");
 		$select.append(option);
-		//console.log(list);
+		console.log(list);
 		if(areaCode != ""){
+			if(undefined == list.length){
+				list = [list]; // 하나만 결과가 반환되면 이렇게 배열화시켜준다.	
+			}			
 			list.forEach(function(v) {
 				//console.log(area);
 				option = $("<option>");
 				option.val(v.code);
 				option.text(v.name);
 				// 지역, 시군구 전부 일치해야 함
-				if($("#areaSelect").val() == '<c:out value="${areaCode}"/>' && option.val() == '<c:out value="${sigunguCode}"/>') {
+				if(/*$("#areaSelect").val() == area && */option.val() == sigungu) {
 					option.prop("selected", true);
+					sigungu = "";
 				}
 				//console.log(option);
 				$select.append(option);

@@ -122,7 +122,9 @@
 #favorite{
 	padding:5px;
 	display:block;
-	text-align:justify;
+	text-align:center;
+	width:100px;
+	heigth:auto;
 }
 
 #festivalTitle > p{
@@ -136,10 +138,14 @@
 	width:auto;
 }
 
+#festivalDetailInfo{
+	margin:10px;
+}
+
 #festivalInfo{
 	width:1200px;
 	height:auto;
-	margin:20px;
+	margin-top:10px;
 }
 
 #festivalPicture{

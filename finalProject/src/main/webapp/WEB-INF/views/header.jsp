@@ -30,7 +30,7 @@ function logout(){
 			</h1>
 			<ul class="gnb fl">
 				<c:url var="festivalList" value="/festivalList.do"></c:url>
-				<a href="${festivalList}" class="fl"><li>축제/행사</li></a>
+				<a href="<c:out value='${festivalList}'/>" class="fl"><li>축제/행사</li></a>
 				<a href="/area" class="fl"><li>여행지</li></a>
 				<a href="/plan" class="fl"><li>일정만들기</li></a>
 				<a href="hotel.do" class="fl"><li>호텔</li></a>

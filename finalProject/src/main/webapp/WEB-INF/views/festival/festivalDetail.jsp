@@ -16,7 +16,7 @@
 	        data: { contentid : ${contentid} },
 	        dataType: 'json',
 	        success: function(data){
-	        	console.log(data);
+	        	//console.log(data);
 	        	checkUserFavorite(data.response.body.items.item); // 찜 여부 체크
 	        	printFestivalCommon(data.response.body.items.item);
 	        	festivalDetailIntro(); // 상세 정보 표시
@@ -34,7 +34,7 @@
 	        data: { contentid : ${contentid} },
 	        dataType: 'json',
 	        success: function(data){
-	        	console.log(data);
+	        	//console.log(data);
 	        	printFestivalDetail(data.response.body.items.item);
 	        }
 	        , error: function(XMLHttpRequest, textStatus, errorThrown) { 
@@ -75,7 +75,24 @@
 	    });	
 	}
 	
+	function forecast(addr){
+		$.ajax({        
+	        url: 'forecast.do',
+	        type: 'post',
+	        data: { addr : addr }, // 날짜는 controller에서 처리. 좌표는 엑셀 파일 읽어서 처리해야한다. 주소 파싱할 것
+	        dataType: 'json',
+	        success: function(data){
+	        	console.log(data);
+	        	//printNearInfo(data.response.body.items.item, contenttypeid); // 공통 정보만 뽑았다.
+	        }
+	        , error: function(XMLHttpRequest, textStatus, errorThrown) { 
+	        	alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+	    	} 
+	    });	
+	}
+	
 	function printFestivalCommon(common){
+		console.log(common);
 		$("#festivalTitle p").text(common.title); // 행사명
 		
 		var src;
@@ -122,15 +139,19 @@
 		
 		// $("#festivalIntro").html(common.overview); // 상세한 설명
 		
-		locationBasedList(common.mapx, common.mapy, 32); // 숙박
-		locationBasedList(common.mapx, common.mapy, 39); // 음식점
+		var x = common.mapx;
+		var y = common.mapy;
+		
+		locationBasedList(x, y, 32); // 숙박
+		locationBasedList(x, y, 39); // 음식점
+		forecast(common.addr1);
 		
 		// 지도 표시를 해준다 ㅇㅇ.
-		printMark(new daum.maps.LatLng(common.mapy, common.mapx));
+		printMark(new daum.maps.LatLng(y, x));
 	}
 	
 	function printFestivalDetail(detail){
-		//console.log(detail);		
+		console.log(detail);		
 		var $commonTable = $("#festivalCommonInfo table");
 		var tr = $("<tr>");
 		var th = $("<th>");
@@ -231,7 +252,7 @@
 	}
 	
 	function printNearInfo(list, contenttypeid){
-		console.log(list, contenttypeid);
+		//console.log(list, contenttypeid);
 		var $nearInfo;
 		var noSearch; // 검색 결과 없을 때
 		if(32 == contenttypeid) {
@@ -314,6 +335,10 @@
 		$nearInfo.append(tableList);
 	}
 	
+	function printForecast(forecast){
+		
+	}
+	
 	function festivalTapEvent(){
 		$("#festivalTap td").each(function(){
 			$(this).click(function(){
@@ -325,7 +350,7 @@
 	}
 	
 	function showInfo(content){
-		console.log(content);
+		//console.log(content);
 		switch(content){
 		case "개요":
 			$(".tapGroup1").hide();
@@ -395,7 +420,6 @@
 			</tr>
 		</table>
 	</div>
-	<br>
 	<div id="festivalDetail">
 		<div id="festivalTitle"><p></p></div>
 		<div>
@@ -412,7 +436,6 @@
 					</td>
 				</tr>
 			</table>
-			<br>
 			<div id="favorite" class="link"><p>찜하기 </p></div>
 		</div>
 		<!-- <div id="festivalIntro"></div> -->
